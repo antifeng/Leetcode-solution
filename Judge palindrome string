@@ -1,0 +1,46 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+  	// Start typing your C/C++ solution below
+		// DO NOT write int main() function
+		string::iterator riter = s.end()-1;
+		string::iterator liter = s.begin();
+	
+
+		if (s.empty() || s.length() == 1)
+			return true;
+
+		int lval, rval;
+		while (liter < riter) {
+            lval = -1;
+    		rval = -1;
+			if (*liter >= 'a' && *liter <= 'z')
+				lval = *liter - 'a';
+			else if (*liter >= 'A' && *liter <= 'Z')
+				lval = *liter - 'A';
+            else if (*liter >= '0' && *liter <= '9')
+				lval = *liter - '0'  + 26;
+			else 
+				liter++;
+
+			if (*riter >= 'a' && *riter <= 'z')
+				rval = *riter - 'a';
+			else if (*riter >= 'A' && *riter <= 'Z')
+				rval = *riter - 'A';
+            else if (*riter >= '0' && *riter <= '9')
+    			rval = *riter - '0' + 26;
+			else
+				riter--;
+
+			if ( lval == rval && lval!= -1){
+				liter++;
+				riter--;
+			}
+			else if (lval!=-1 && rval!=-1)
+				return false;
+		}
+	
+		return true;
+	
+	}
+};
