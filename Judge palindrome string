@@ -1,34 +1,29 @@
+#include <algorithm>
+
 class Solution {
 public:
     bool isPalindrome(string s) {
-  	// Start typing your C/C++ solution below
-		// DO NOT write int main() function
-		string::iterator riter = s.end()-1;
-		string::iterator liter = s.begin();
-	
-
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        
 		if (s.empty() || s.length() == 1)
 			return true;
-
+        
+        std::transform(s.begin(), s.end(), s.begin(), ::toupper); 
+        string::iterator riter = s.end()-1;
+        string::iterator liter = s.begin();
+        
 		int lval, rval;
-		while (liter < riter) {
-            lval = -1;
-    		rval = -1;
-			if (*liter >= 'a' && *liter <= 'z')
-				lval = *liter - 'a';
-			else if (*liter >= 'A' && *liter <= 'Z')
-				lval = *liter - 'A';
-            else if (*liter >= '0' && *liter <= '9')
-				lval = *liter - '0'  + 26;
-			else 
-				liter++;
+	while (liter < riter) {
+            	lval = rval = -1;
+    	
+		if ((*liter >= 'A' && *liter <= 'Z') || (*liter >= '0' && *liter <= '9'))
+			lval = *liter;
+		else 
+			liter++;
 
-			if (*riter >= 'a' && *riter <= 'z')
-				rval = *riter - 'a';
-			else if (*riter >= 'A' && *riter <= 'Z')
-				rval = *riter - 'A';
-            else if (*riter >= '0' && *riter <= '9')
-    			rval = *riter - '0' + 26;
+			if ((*riter >= 'A' && *riter <= 'Z') || (*riter >= '0' && *riter <= '9'))
+    			rval = *riter;
 			else
 				riter--;
 
@@ -36,11 +31,10 @@ public:
 				liter++;
 				riter--;
 			}
-			else if (lval!=-1 && rval!=-1)
+			else if (lval!=-1 && rval!= -1)
 				return false;
 		}
-	
+
 		return true;
-	
-	}
+    }
 };
