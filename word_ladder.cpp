@@ -1,8 +1,12 @@
 class Solution {
 public:
     /**
-      *The key idea is to apply BFS to enumerate all morph words from inner core to outer ring
-      *To erase valid morph word from dict is also important to reduct running time
+      * The key idea is to apply BFS to enumerate all morph words from inner core to outer ring
+      * To erase valid morph word from dict is also important to reduct running time
+      * To take the advantage of unordered_set::find in O(1) rather than iterate all ele in dict is also cretical 
+      * to reduce running time
+      * in queue, pop() will remove the front() ele
+      * in vector, pop_back() will remove back() ele
     */
     int ladderLength(string start, string end, unordered_set<string> &dict) {
         // Start typing your C/C++ solution below
@@ -10,7 +14,7 @@ public:
         queue<string> CurRingVec;
         queue<string> NextRingVec;
         int idist = 1;
-      unordered_set<string>::iterator itorend = dict.end();
+        unordered_set<string>::iterator itorend = dict.end();
     
     	CurRingVec.push(start);
         
