@@ -8,47 +8,40 @@
  * };
  */
 class Solution {
+
+private:
+     typedef vector<int>::iterator iter;
+    TreeNode *buildTreeRecursive(iter instart, iter inend, iter poststart, iter postend) {
+		TreeNode* ptree = NULL;
+		if ( inend == instart || postend == poststart)
+    		return ptree;
+		int inLen = inend - instart;
+		int postLen = postend - poststart;
+		if (inLen == 1 && postLen == 1)  {
+			ptree = new TreeNode(instart[0]);
+		}
+		else{
+			//set the root
+			ptree = new TreeNode(*(postend-1));
+			for (iter miditor = instart; miditor < inend; miditor++) {
+				if (*miditor == *(postend-1)) {
+						ptree->left = buildTreeRecursive(instart, miditor, poststart, poststart+(miditor-instart));
+                		ptree->right = buildTreeRecursive(miditor+1, inend, postend-(inend-miditor), postend-1);
+				}
+			}//end for
+		}//end else
+        return ptree;
+	}
 public:
 
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
   	// Start typing your C/C++ solution below
 		// DO NOT write int main() function
-		if (inorder.empty() || postorder.empty()) {
-			return NULL;
-		}
-
-		TreeNode* ptree;
-		int inLen = inorder.size();
-		int postLen = postorder.size();
-		if (inLen == 1 && postLen == 1)  {
-			ptree = new TreeNode(inorder[0]);
-		}
-		else{
-			//set the root
-			ptree = new TreeNode(*(postorder.end()-1));
-			vector<int> leftInNodes;
-			vector<int> rightInNodes;
-			vector<int> leftPostNodes;
-			vector<int> rightPostNodes;
-			vector<int>::iterator tempitor = inorder.begin() ;
-
-			for (tempitor= inorder.begin(); tempitor!=inorder.end(); tempitor++) {
-
-				if (*tempitor == *(postorder.end()-1)) {
-
-					copy(inorder.begin(), tempitor, back_inserter(leftInNodes));
-					copy(tempitor+1, inorder.end(), back_inserter(rightInNodes));
-					std::vector<int>::iterator leftPost = postorder.begin();
-					copy(leftPost, leftPost+leftInNodes.size(), back_inserter(leftPostNodes));
-					copy(leftPost+leftInNodes.size(), postorder.end()-1,back_inserter(rightPostNodes));
-					
-					ptree->left = buildTree(leftInNodes, leftPostNodes);
-                	ptree->right = buildTree(rightInNodes, rightPostNodes);
-
-				}
-
-			}//end for
-		}//end else
+		TreeNode* ptree = NULL;
+		if (inorder.empty() || postorder.empty()) 
+			return ptree;
+		
+		ptree = buildTreeRecursive(inorder.begin(), inorder.end(), postorder.begin(), postorder.end());
 		return ptree;
 	}
 };
