@@ -1,4 +1,4 @@
 Leetcode-solution
 =================
 
-This set of code are the solutions of Leetcode
+This set of code is the solution of Leetcode
