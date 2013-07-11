@@ -36,10 +36,7 @@ private:
 public:
 
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
-		TreeNode* ptree = NULL;
-		if (inorder.empty() || postorder.empty()) 
-			return ptree;
-		
+		TreeNode* ptree = NULL;		
 		ptree = buildTreeRecursive(inorder.begin(), inorder.end(), postorder.begin(), postorder.end());
 		return ptree;
 	}
