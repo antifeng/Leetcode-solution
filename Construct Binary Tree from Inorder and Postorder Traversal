@@ -10,10 +10,11 @@
 class Solution {
 
 private:
+	//Key idea: the last element of postorder seq is the root node which can be used to divide inorder seq
      typedef vector<int>::iterator iter;
     TreeNode *buildTreeRecursive(iter instart, iter inend, iter poststart, iter postend) {
 		TreeNode* ptree = NULL;
-		if ( inend == instart || postend == poststart)
+		if ( inend == instart || postend == poststart)	
     		return ptree;
 		int inLen = inend - instart;
 		int postLen = postend - poststart;
@@ -24,7 +25,7 @@ private:
 			//set the root
 			ptree = new TreeNode(*(postend-1));
 			for (iter miditor = instart; miditor < inend; miditor++) {
-				if (*miditor == *(postend-1)) {
+				if (*miditor == *(postend-1)) { //Calc the position of iterator is not easy
 						ptree->left = buildTreeRecursive(instart, miditor, poststart, poststart+(miditor-instart));
                 		ptree->right = buildTreeRecursive(miditor+1, inend, postend-(inend-miditor), postend-1);
 				}
@@ -35,8 +36,6 @@ private:
 public:
 
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
-  	// Start typing your C/C++ solution below
-		// DO NOT write int main() function
 		TreeNode* ptree = NULL;
 		if (inorder.empty() || postorder.empty()) 
 			return ptree;
