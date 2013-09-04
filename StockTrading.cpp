@@ -1,5 +1,29 @@
 
-class Solution {
+class Solution1 {
+public:
+    //idea is to use the min to get the max diff
+    //
+    int maxProfit(vector<int> &prices) {
+    
+    int size = prices.size();
+	if (prices.empty() || size==1)
+		return 0;
+	
+	int maxProfit = 0;
+	int minIdx = 0;
+    
+	for(int i=1; i<size; i++) {
+		if (prices[minIdx]> prices[i])
+			minIdx = i;
+		int  curProfit = prices[i] - prices[minIdx];
+		if ( curProfit > maxProfit)
+			maxProfit = curProfit;
+	}
+	return maxProfit;
+    }
+};
+
+class Solution2 {
 public:
     //idea is to find the index of max and min element
     //Then divide the array into three parts.
