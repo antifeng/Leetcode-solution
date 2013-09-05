@@ -1,8 +1,7 @@
-
 class Solution1 {
 public:
     //idea is to use the min to get the max diff
-    //
+    //Complexity O(n)
     int maxProfit(vector<int> &prices) {
     
     int size = prices.size();
@@ -27,7 +26,7 @@ class Solution2 {
 public:
     //idea is to find the index of max and min element
     //Then divide the array into three parts.
- 	//Divide and conque
+ 	//Divide and conquer
 int getmaxProfit(vector<int> &prices, int s, int t) {
     
     if (s >= t)
