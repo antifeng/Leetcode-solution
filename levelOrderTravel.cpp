@@ -9,8 +9,8 @@
  */
 class Solution {
 public:
-		//Remember: 
-		//1. queue and stack in STL
+    //Note: 
+    //1. queue and stack in STL
     //2. vector.back == vector[size], vector.front == vector[0]
     //3. queue.pop == vector.pop_front(it is not exist in vector)
     //4. queue.push == vector.push_back()
