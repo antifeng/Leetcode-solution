@@ -8,9 +8,8 @@
  * };
  */
 class Solution {
-public:
+private:
     int Height(TreeNode* tree){
-        
         if (!tree)
             return 0;
         int lHeight, rHeight;
@@ -28,13 +27,11 @@ public:
         else
             return max(lHeight, rHeight) + 1;
     }
+    
+public:
     bool isBalanced(TreeNode *root) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        if (!root)
+        if ((!root) || (!(root->left) && !(root->right)))
            return true;
-        if (!(root->left) && !(root->right))
-            return true;
             
         int lHeight = Height( root->left);
         int rHeight = Height( root->right);
