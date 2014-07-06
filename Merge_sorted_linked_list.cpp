@@ -8,41 +8,38 @@
  */
 class Solution {
 public:
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        if (!l1)
-            return l2;
-        if (!l2)
-            return l1;
+    ListNode *mergeTwoLists(ListNode *left, ListNode *right) {
+        if (!left)
+            return right;
+        if (!right)
+            return left;
         
-        ListNode* newList;
-        ListNode* endNode; //use this node to track the insert point
+        ListNode* header;
+        ListNode* tail; //use this node to track the insert point
         
-        if (l1->val < l2->val) {
-            newList = l1;
-            endNode = newList;
-            l1 = l1->next;
+        //handler the first node of the new list
+        if (left->val < right->val) {
+            header = left;
+            left = left->next;
         }
         else {
-            newList = l2;
-            endNode  = newList;
-            l2 = l2->next;
+            header = right;
+            right = right->next;
         }
+        tail = header;
         
-        while (l1 && l2) {
-            
-            if (l1->val < l2->val){
-                endNode->next = l1;
-                l1 = l1->next;
+        while (left && right) {
+            if (left->val < right->val){
+                tail->next = left;
+                left = left->next;
              }
              else {
-                endNode->next = l2;
-                l2 = l2->next;
+                tail->next = right;
+                right = right->next;
              }
-             endNode = endNode->next;
+             tail = tail->next;
         }
-        endNode->next = l1? l1:l2;
-        return newList;
+        tail->next = left? left:right;
+        return header;
     }
 };
