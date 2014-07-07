@@ -5,7 +5,6 @@ public:
     /**
      * The idea is to decompsite n into seq of pow of 2
      * Be careful when x==0, x==1, Overflow
-     * 
      */
     
 	double pow(double x, int n) {
