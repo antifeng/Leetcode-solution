@@ -22,3 +22,22 @@ public:
 		return dp[n];
     }
 };
+class Solution2 {
+public:
+    //Think it from beginning
+    //at first, there are two options: 1 step or 2 steps
+    //therefore f(n) = f(n-1) + f(n-2) typic Fibonacci problem
+    int climbStairs(int n) {
+        if (n<=0)
+            return 0;
+        else if ( n<=2)
+            return n;
+            
+        int a=1, b=2;
+        for (int i=2; i<n; i=i+2) {
+            a = a + b;  //f(n) = f(n-1) + f(n-2) 
+            b = a + b;  //f(n+1) = f(n-1) + f(n) 
+        }
+        return ((n%2)==0) ? b : a;
+    }
+};
