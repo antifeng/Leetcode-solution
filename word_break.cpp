@@ -116,3 +116,27 @@ int main()
 
     return 0;
 }
+
+/*
+Initial version didn't pass
+
+bool wordBreak(string s, vector<string>& wordDict) {
+
+        sort( wordDict.begin(), wordDict.end(), [](const string& a, const string& b) -> bool
+      {
+          return a.length() > b.length();
+      });
+
+      for_each(wordDict.begin(), wordDict.end(), [&s](const string& f)
+                            {
+                                std::size_t pos = s.find(f);
+                                while ( pos != string::npos )
+                                {
+                                   s.erase( pos, f.length() );
+                                   pos = s.find(f);
+                                }
+                            });
+
+      return s.empty();
+    }
+*/
