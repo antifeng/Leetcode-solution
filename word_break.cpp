@@ -22,7 +22,7 @@ using namespace std;
 class Solution
 {
 private:
-    bool bFound;
+
     int* visited;
 public:
 
@@ -41,9 +41,6 @@ public:
         {
             visited[pos] = i;
 
-            if ( ( pos + dict[i].length() )  > s.length() )
-                continue;
-
             bMatched = ( pos == s.find( dict[i], pos ) );
 
             // if matched then test the rest of the string with all elements in the dict
@@ -52,10 +49,7 @@ public:
             {
                 path.push_back( dict[i] );
                 if ( ( pos + dict[i].length() ) == s.length() )
-                {
-                    bFound = true;
                     return true;
-                }
 
                 return backTrack(s, pos+dict[i].length(), dict, path );
             }
@@ -77,14 +71,12 @@ public:
     {
       sort( wordDict.begin(), wordDict.end() );
 
-      bFound = false;
       visited = new int[s.length()]();
-
       // -1 is also necessary for the initial iteration
       std::fill_n( visited, s.length(), -1 );
 
       vector<string> path;
-      backTrack( s, 0, wordDict, path );
+      bool bFound = backTrack( s, 0, wordDict, path );
       delete [] visited;
 
       for_each( path.begin(), path.end(), [](string& f)
